@@ -7,7 +7,7 @@ export default function Home() {
       padding: '0 20px'
     }}>
       <h1 style={{fontSize: '48px', marginBottom: '10px'}}>
-        Welcome to [Pangalan mo] Store!
+        Welcome to Shali's Store!
       </h1>
       
       <p style={{fontSize: '20px', color: '#666', marginBottom: '40px'}}>
