@@ -77,7 +77,7 @@ export default function Home() {
               <p style={{margin: "0 0 10px", fontWeight: "bold", fontSize: "18px"}}>₱{p.price}</p>
               <button 
                 onClick={() => addToCart(p)} 
-                style={{padding: "10px 16px", cursor: "pointer", background: "black", color: "white", border: "none", borderRadius: "4px", width: "100%"}}
+                style={{padding: "10px 16px", cursor: "pointer", background: "red", color: "white", border: "none", borderRadius: "4px", width: "100%",transition: "box-shadow 0.3s ease, transform 0.1s"}}
               >
                 Add to Cart
               </button>
