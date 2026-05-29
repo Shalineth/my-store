@@ -7,7 +7,74 @@ export default function Home() {
     { id: 2, name: "Running Shoes", price: 1200, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" }, 
     { id: 3, name: "Baseball Cap", price: 150, image: "https://via.placeholder.com/400x400/000/FFFFFF?text=Cap" },
     { id: 4, name: "Hooded Sweatshirt", price: 900, image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400" },
-    { id: 5, name: "Denim Jacket", price: 1800, image: "https://images.unsplash.com/photo-1551537482-f2075a1d41f2?w=400" },
+    { id: 5, name: "Denim Jacket", price: 1800, image: "https://ima'use client'
+import { useState } from 'react'
+import { products } from '../products'
+
+export default function Home() {
+  const [cart, setCart] = useState([])
+  const [showCheckout, setShowCheckout] = useState(false)
+
+  const addToCart = (product) => {
+    setCart([...cart, product])
+  }
+
+  const removeFromCart = (index) => {
+    setCart(cart.filter((_, i) => i !== index))
+  }
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0)
+  
+  const messengerLink = `https://m.me/girlversionnikyrie?text=${encodeURIComponent(
+    `New Order:\n${cart.map(p => `- ${p.name} ₱${p.price}`).join('\n')}\nTotal: ₱${total}\n\nName:\nAddress:\nContact:`
+  )}`
+
+  return (
+    <main style={{padding: 40, maxWidth: 1000, margin: '0 auto'}}>
+      <h1 style={{textAlign: 'center'}}>My Store</h1>
+      
+      <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 20, marginBottom: 40}}>
+        {products.map(p => (
+          <div key={p.id} style={{border: '1px solid #ddd', padding: 20, borderRadius: 12}}>
+            <img src={p.image} style={{width: '100%', height: 200, objectFit: 'cover', borderRadius: 8}} />
+            <h3>{p.name}</h3>
+            <p style={{fontSize: 20, fontWeight: 'bold'}}>₱{p.price}</p>
+            <button onClick={() => addToCart(p)} style={{width: '100%', padding: 10, background: 'black', color: 'white', border: 'none', borderRadius: 8, cursor: 'pointer'}}>
+              Add to Cart
+            </button>
+          </div>
+        ))}
+      </div>
+
+      {cart.length > 0 && (
+        <button onClick={() => setShowCheckout(true)} style={{position: 'fixed', bottom: 30, right: 30, padding: '15px 30px', background: 'black', color: 'white', borderRadius: 50, border: 'none', fontSize: 16, cursor: 'pointer'}}>
+          Cart ({cart.length}) - ₱{total}
+        </button>
+      )}
+
+      {showCheckout && (
+        <div style={{position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000}}>
+          <div style={{background: 'white', padding: 30, borderRadius: 12, maxWidth: 500, width: '90%'}}>
+            <h2>Your Order</h2>
+            {cart.map((item, i) => (
+              <div key={i} style={{display: 'flex', justifyContent: 'space-between', marginBottom: 10}}>
+                <span>{item.name}</span>
+                <span>₱{item.price}</span>
+                <button onClick={() => removeFromCart(i)} style={{cursor: 'pointer'}}>X</button>
+              </div>
+            ))}
+            <hr />
+            <h3>Total: ₱{total}</h3>
+            <a href={messengerLink} target="_blank" style={{display: 'block', textAlign: 'center', padding: 15, background: '#0084ff', color: 'white', borderRadius: 8, textDecoration: 'none', marginTop: 20}}>
+              Order via Messenger
+            </a>
+            <button onClick={() => setShowCheckout(false)} style={{width: '100%', marginTop: 10, padding: 10, cursor: 'pointer'}}>Close</button>
+          </div>
+        </div>
+      )}
+    </main>
+  )
+}ges.unsplash.com/photo-1551537482-f2075a1d41f2?w=400" },
     { id: 6, name: "Aviator Sunglasses", price: 500, image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400" },
     { id: 7, name: "Travel Backpack", price: 750, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400" },
     { id: 8, name: "Wrist Watch", price: 2200, image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400" },
