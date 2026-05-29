@@ -1,29 +1,26 @@
+'use client'
+import { useState } from 'react'
+import { products } from './products'
+
 export default function Home() {
+  const [cart, setCart] = useState([])
+  
+  const addToCart = (p) => setCart([...cart, p])
+  
   return (
-    <main style={{
-      textAlign: 'center', 
-      marginTop: '100px', 
-      fontFamily: 'Arial, sans-serif',
-      padding: '0 20px'
-    }}>
-      <h1 style={{fontSize: '48px', marginBottom: '10px'}}>
-        Welcome to Shali's Store!
-      </h1>
-      
-      <p style={{fontSize: '20px', color: '#666', marginBottom: '40px'}}>
-        Mga paninda ko:
-      </p>
-      
-      <ul style={{
-        listStyle: 'none', 
-        padding: 0, 
-        fontSize: '18px',
-        lineHeight: '2.5'
-      }}>
-        <li>👕 T-shirt - ₱299</li>
-        <li>👟 Sapatos - ₱999</li>
-        <li>🧢 Cap - ₱199</li>
-      </ul>
-    </main>
+    <div style={{padding: 20}}>
+      <h1>My Store 🔥</h1>
+      <div style={{display: 'flex', gap: 20, flexWrap: 'wrap'}}>
+        {products.map(p => (
+          <div key={p.id} style={{border: '1px solid gray', padding: 10}}>
+            <img src={p.image} width={200} />
+            <h3>{p.name}</h3>
+            <p>₱{p.price}</p>
+            <button onClick={() => addToCart(p)}>Add to Cart</button>
+          </div>
+        ))}
+      </div>
+      <h2>Cart: {cart.length} items</h2>
+    </div>
   )
 }
