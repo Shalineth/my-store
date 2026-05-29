@@ -1,72 +1,50 @@
-const products = [
-  { id: 1, name: "IT WORKS ON MY MACHINE", price: 380, image: "https://dummyimage.com/400x300/000/FFFFFF&text=IT+WORKS+ON+MY+MACHINE+TEE", sizes: ["S", "M", "L", "XL", "XXL"], stock: 50 },
-  { id: 2, name: "COFFEE++", price: 280, image: "https://dummyimage.com/400x300/6F4E37/FFFFFF&text=COFFEE%2B%2B+MUG", sizes: ["One Size"], stock: 40 },
-  { id: 3, name: "404 SLEEP NOT FOUND", price: 450, image: "https://dummyimage.com/400x300/FF0000/FFFFFF&text=404+SLEEP+HOODIE", sizes: ["S", "M", "L", "XL", "XXL"], stock: 30 },
-  { id: 4, name: "01000 01001", price: 250, image: "https://dummyimage.com/400x300/00FF00/000&text=01000+01001+TOTE+BAG", sizes: ["Free Size"], stock: 35 },
-  { id: 5, name: "THERE IS NO CLOUD", price: 280, image: "https://dummyimage.com/400x300/87CEEB/000&text=THERE+IS+NO+CLOUD+MUG", sizes: ["One Size"], stock: 45 },
-  { id: 6, name: "CTRL+Z MY LIFE", price: 120, image: "https://dummyimage.com/400x300/FFD700/000&text=CTRL%2BZ+STICKER", sizes: ["One Size"], stock: 100 },
-  { id: 7, name: "PRINTF HELLO WORLD", price: 380, image: "https://dummyimage.com/400x300/000/00FF00&text=PRINTF+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 8, name: "BUGS ARE FEATURES", price: 500, image: "https://dummyimage.com/400x300/FF4500/FFFFFF&text=BUGS+PREMIUM+HOODIE", sizes: ["S", "M", "L", "XL"], stock: 25 },
-  { id: 9, name: "SEGMENTATION FAULT", price: 380, image: "https://dummyimage.com/400x300/8B0000/FFFFFF&text=SEGFAULT+TEE", sizes: ["S", "M", "L", "XL"], stock: 40 },
-  { id: 10, name: "I VOID WARRANTIES", price: 350, image: "https://dummyimage.com/400x300/000/FFD700&text=VOID+WARRANTY+CAP", sizes: ["S", "M", "L"], stock: 35 },
-  { id: 11, name: "BEER 36 COFFEE 37", price: 280, image: "https://dummyimage.com/400x300/8B4513/FFFFFF&text=BEER+COFFEE+MUG", sizes: ["One Size"], stock: 50 },
-  { id: 12, name: "SUDO MAKE ME SANDWICH", price: 380, image: "https://dummyimage.com/400x300/228B22/FFFFFF&text=SUDO+TEE", sizes: ["S", "M", "L", "XL"], stock: 45 },
-  { id: 13, name: "WHILE TRUE SLEEP", price: 450, image: "https://dummyimage.com/400x300/191970/FFFFFF&text=WHILE+TRUE+HOODIE", sizes: ["S", "M", "L", "XL", "XXL"], stock: 20 },
-  { id: 14, name: "GIT COMMIT M WIP", price: 380, image: "https://dummyimage.com/400x300/F05032/FFFFFF&text=GIT+COMMIT+TEE", sizes: ["S", "M", "L", "XL"], stock: 55 },
-  { id: 15, name: "I SPEAK FLUENT SARCASM", price: 300, image: "https://dummyimage.com/400x300/FF69B4/000&text=SARCASM+MUG", sizes: ["Free Size"], stock: 60 },
-  { id: 16, name: "KEEP CALM AND DEBUG", price: 380, image: "https://dummyimage.com/400x300/0047AB/FFFFFF&text=DEBUG+TEE", sizes: ["S", "M", "L", "XL"], stock: 70 },
-  { id: 17, name: "THERE ARE 10 TYPES", price: 380, image: "https://dummyimage.com/400x300/000/FFFFFF&text=10+TYPES+TEE", sizes: ["S", "M", "L", "XL"], stock: 40 },
-  { id: 18, name: "WIFI PASSWORD INCORRECT", price: 120, image: "https://dummyimage.com/400x300/FF0000/FFFFFF&text=WIFI+STICKER", sizes: ["One Size"], stock: 120 },
-  { id: 19, name: "MY CODE DOESNT WORK", price: 380, image: "https://dummyimage.com/400x300/000/FF0000&text=CODE+DOESNT+WORK+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 20, name: "I DONT ALWAYS TEST", price: 380, image: "https://dummyimage.com/400x300/4169E1/FFFFFF&text=DONT+TEST+TEE", sizes: ["S", "M", "L", "XL"], stock: 45 },
-  { id: 21, name: "THERE IS NO PLACE LIKE 127.0.0.1", price: 380, image: "https://dummyimage.com/400x300/2F4F4F/FFFFFF&text=LOCALHOST+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 22, name: "EXCEPTIONS ARE MY CONSTANT", price: 380, image: "https://dummyimage.com/400x300/000/00CED1&text=EXCEPTIONS+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 23, name: "I CODE THEREFORE I AM", price: 380, image: "https://dummyimage.com/400x300/800080/FFFFFF&text=CODE+THEREFORE+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 24, name: "TALK IS CHEAP SHOW CODE", price: 380, image: "https://dummyimage.com/400x300/000/FFFF00&text=TALK+IS+CHEAP+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 25, name: "REAL PROGRAMMERS NO COMMENT", price: 380, image: "https://dummyimage.com/400x300/696969/FFFFFF&text=NO+COMMENT+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 26, name: "I TURN COFFEE INTO CODE", price: 300, image: "https://dummyimage.com/400x300/6F4E37/FFFFFF&text=COFFEE+TO+CODE+MUG", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 27, name: "IF IT HURTS DO IT MORE", price: 380, image: "https://dummyimage.com/400x300/DC143C/FFFFFF&text=HURTS+MORE+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 28, name: "DEBUGGING IS DETECTIVE WORK", price: 380, image: "https://dummyimage.com/400x300/000/FFFFFF&text=DEBUGGING+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 29, name: "EAT SLEEP CODE REPEAT", price: 380, image: "https://dummyimage.com/400x300/FF6347/FFFFFF&text=EAT+SLEEP+CODE+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 30, name: "NULL POINTER EXCEPTION", price: 380, image: "https://dummyimage.com/400x300/8B0000/FFFFFF&text=NULL+POINTER+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 31, name: "NO IDEA WHAT IM DOING", price: 380, image: "https://dummyimage.com/400x300/000/FFD700&text=NO+IDEA+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 32, name: "CODE LIKE A GIRL", price: 380, image: "https://dummyimage.com/400x300/FF1493/FFFFFF&text=CODE+LIKE+GIRL+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 33, name: "PAUSE GAME TO BE HERE", price: 380, image: "https://dummyimage.com/400x300/32CD32/000&text=PAUSE+GAME+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 34, name: "PROGRAMMER AT WORK", price: 380, image: "https://dummyimage.com/400x300/000/FFFFFF&text=PROGRAMMER+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 35, name: "KEEP CALM PUSH TO PROD", price: 380, image: "https://dummyimage.com/400x300/0047AB/FFFFFF&text=PUSH+TO+PROD+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 36, name: "MY OTHER PC IS YOURS", price: 380, image: "https://dummyimage.com/400x300/4682B4/FFFFFF&text=OTHER+PC+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 37, name: "ERROR 404 BRAIN NOT FOUND", price: 380, image: "https://dummyimage.com/400x300/FF0000/FFFFFF&text=ERROR+404+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 38, name: "SUDO RM RF", price: 380, image: "https://dummyimage.com/400x300/000/FF0000&text=SUDO+RM+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 39, name: "I AM THE SENIOR DEV", price: 380, image: "https://dummyimage.com/400x300/FFD700/000&text=SENIOR+DEV+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 40, name: "MOVE FAST BREAK THINGS", price: 380, image: "https://dummyimage.com/400x300/DC143C/FFFFFF&text=MOVE+FAST+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 41, name: "HELLO WORLD FROM HELL", price: 380, image: "https://dummyimage.com/400x300/8B0000/FFFFFF&text=HELLO+WORLD+HELL+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 42, name: "I DEBUG FOR FUN", price: 380, image: "https://dummyimage.com/400x300/000/00FF00&text=DEBUG+FOR+FUN+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 43, name: "GIT PULL ORIGIN MASTER", price: 380, image: "https://dummyimage.com/400x300/F05032/FFFFFF&text=GIT+PULL+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 44, name: "CODE SLEEP REPEAT", price: 380, image: "https://dummyimage.com/400x300/000/FFFFFF&text=CODE+SLEEP+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 45, name: "BRUTE FORCE SOLUTION", price: 380, image: "https://dummyimage.com/400x300/FF4500/FFFFFF&text=BRUTE+FORCE+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 46, name: "STACK OVERFLOW SURVIVOR", price: 380, image: "https://dummyimage.com/400x300/F48024/FFFFFF&text=STACK+OVERFLOW+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 47, name: "ALGORITHM NINJA", price: 380, image: "https://dummyimage.com/400x300/000/FFD700&text=ALGORITHM+NINJA+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 48, name: "COMPILE ERROR DETECTED", price: 380, image: "https://dummyimage.com/400x300/FF0000/FFFFFF&text=COMPILE+ERROR+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 49, name: "I SPEAK BINARY", price: 380, image: "https://dummyimage.com/400x300/000/00FF00&text=BINARY+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 50, name: "CACHE ME OUTSIDE", price: 380, image: "https://dummyimage.com/400x300/4169E1/FFFFFF&text=CACHE+ME+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 51, name: "THERE ARE ONLY 10 PEOPLE", price: 380, image: "https://dummyimage.com/400x300/000/FFFFFF&text=10+PEOPLE+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 52, name: "UNDER CONSTRUCTION", price: 300, image: "https://dummyimage.com/400x300/FFD700/000&text=UNDER+CONSTRUCTION+MUG", sizes: ["Free Size"], stock: 40 },
-  { id: 53, name: "I HAVE ROOT ACCESS", price: 380, image: "https://dummyimage.com/400x300/8B0000/FFFFFF&text=ROOT+ACCESS+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 54, name: "KEEP CALM AND CODE ON", price: 380, image: "https://dummyimage.com/400x300/0047AB/FFFFFF&text=CODE+ON+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 55, name: "DEBUGGER BY DAY", price: 380, image: "https://dummyimage.com/400x300/000/00CED1&text=DEBUGGER+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 56, name: "I HATE JAVASCRIPT", price: 380, image: "https://dummyimage.com/400x300/F7DF1E/000&text=HATE+JS+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 57, name: "PYTHON IS LIFE", price: 380, image: "https://dummyimage.com/400x300/3776AB/FFFFFF&text=PYTHON+LIFE+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 58, name: "C PLUS FOREVER", price: 300, image: "https://dummyimage.com/400x300/00599C/FFFFFF&text=C%2B%2B+MUG", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 59, name: "LINUX USER", price: 380, image: "https://dummyimage.com/400x300/000/FFD700&text=LINUX+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 60, name: "WINDOWS UPDATE RUINED ME", price: 380, image: "https://dummyimage.com/400x300/0078D4/FFFFFF&text=WINDOWS+UPDATE+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 61, name: "MAC USER BUT POOR", price: 380, image: "https://dummyimage.com/400x300/999/FFFFFF&text=MAC+POOR+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 62, name: "DARK MODE ONLY", price: 380, image: "https://dummyimage.com/400x300/000/FFFFFF&text=DARK+MODE+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 63, name: "LIGHT MODE USER", price: 380, image: "https://dummyimage.com/400x300/FFFFFF/000&text=LIGHT+MODE+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 64, name: "VIM USER", price: 380, image: "https://dummyimage.com/400x300/019733/FFFFFF&text=VIM+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 65, name: "EMACS FOREVER", price: 380, image: "https://dummyimage.com/400x300/7F5AB6/FFFFFF&text=EMACS+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 66, name: "VS CODE MASTER", price: 380, image: "https://dummyimage.com/400x300/007ACC/FFFFFF&text=VSCODE+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 67, name: "CTRL C CTRL V DEV", price: 120, image: "https://dummyimage.com/400x300/000/FFD700&text=CTRL+C+V+STICKER", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 68, name: "COPY PASTE ENGINEER", price: 120, image: "https://dummyimage.com/400x300/696969/FFFFFF&text=COPY+PASTE+STICKER", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 69, name: "GOOGLE IS MY IDE", price: 120, image: "https://dummyimage.com/400x300/4285F4/FFFFFF&text=GOOGLE+IDE+STICKER", sizes: ["S", "M", "L", "XL"], stock: 50 },
-  { id: 70, name: "RTFM USER", price: 380, image: "https://dummyimage.com/400x300/FF0000/FFFFFF&text=RTFM+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 }
-]
+'use client'
+import { useState } from "react"
+
+export default function Home() {
+  const products = [
+    { id: 1, name: "IT WORKS ON MY MACHINE", price: 380, image: "https://dummyimage.com/400x300/000/FFFFFF&text=IT+WORKS+ON+MY+MACHINE+TEE", sizes: ["S", "M", "L", "XL", "XXL"], stock: 50 },
+    { id: 2, name: "COFFEE++", price: 280, image: "https://dummyimage.com/400x300/6F4E37/FFFFFF&text=COFFEE%2B%2B+MUG", sizes: ["One Size"], stock: 40 },
+    { id: 3, name: "404 SLEEP NOT FOUND", price: 450, image: "https://dummyimage.com/400x300/FF0000/FFFFFF&text=404+SLEEP+HOODIE", sizes: ["S", "M", "L", "XL", "XXL"], stock: 30 },
+    { id: 4, name: "01000 01001", price: 250, image: "https://dummyimage.com/400x300/00FF00/000&text=01000+01001+TOTE+BAG", sizes: ["Free Size"], stock: 35 },
+    { id: 5, name: "THERE IS NO CLOUD", price: 280, image: "https://dummyimage.com/400x300/87CEEB/000&text=THERE+IS+NO+CLOUD+MUG", sizes: ["One Size"], stock: 45 },
+    { id: 6, name: "CTRL+Z MY LIFE", price: 120, image: "https://dummyimage.com/400x300/FFD700/000&text=CTRL%2BZ+STICKER", sizes: ["One Size"], stock: 100 },
+    { id: 7, name: "PRINTF HELLO WORLD", price: 380, image: "https://dummyimage.com/400x300/000/00FF00&text=PRINTF+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 },
+    { id: 8, name: "BUGS ARE FEATURES", price: 500, image: "https://dummyimage.com/400x300/FF4500/FFFFFF&text=BUGS+PREMIUM+HOODIE", sizes: ["S", "M", "L", "XL"], stock: 25 },
+    { id: 9, name: "SEGMENTATION FAULT", price: 380, image: "https://dummyimage.com/400x300/8B0000/FFFFFF&text=SEGFAULT+TEE", sizes: ["S", "M", "L", "XL"], stock: 40 },
+    { id: 10, name: "I VOID WARRANTIES", price: 350, image: "https://dummyimage.com/400x300/000/FFD700&text=VOID+WARRANTY+CAP", sizes: ["S", "M", "L"], stock: 35 },
+    // ... dito mo idugtong lahat ng products mo hanggang id 70
+    { id: 70, name: "RTFM USER", price: 380, image: "https://dummyimage.com/400x300/FF0000/FFFFFF&text=RTFM+TEE", sizes: ["S", "M", "L", "XL"], stock: 50 }
+  ]
+
+  const [cart, setCart] = useState([])
+
+  const addToCart = (product) => {
+    setCart([...cart, {...product}])
+    alert(product.name + " na-add sa cart! Total items: " + (cart.length + 1))
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-4 md:p-8">
+      <h1 className="text-3xl md:text-4xl font-bold text-center mb-2">CpE Merch Store</h1>
+      <p className="text-center text-gray-600 mb-8">₱120 - ₱500 lang! Good quality, pang-masa</p>
+      
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+        {products.map(product => (
+          <div key={product.id} className="bg-white rounded-lg shadow hover:shadow-lg transition p-3">
+            <img src={product.image} alt={product.name} className="w-full h-40 object-cover rounded mb-2"/>
+            <h2 className="text-sm md:text-base font-bold mb-1 line-clamp-2">{product.name}</h2>
+            <p className="text-xs text-gray-500 mb-1">Stock: {product.stock}</p>
+            <p className="text-xl md:text-2xl text-green-600 font-bold mb-2">₱{product.price}</p>
+            <button 
+              onClick={() => addToCart(product)} 
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded font-bold text-sm"
+            >
+              Add to Cart
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
