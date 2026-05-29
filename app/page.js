@@ -60,10 +60,8 @@ export default function Home() {
     if (cart.length === 0) return alert("Cart is empty!")
     setOrderPlaced(true)
     setTimeout(() => {
-      alert(`Order placed successfully!\nPayment: ${paymentMethod}\nTotal: ₱${total}`)
-      setCart([])
       setOrderPlaced(false)
-    }, 500)
+    }, 3000)
   }
 
   const handleSizeChange = (productId, size) => {
@@ -146,6 +144,29 @@ export default function Home() {
           </>
         )}
       </aside>
+
+      {orderPlaced && (
+        <div style={{
+          position: "fixed", top: 0, left: 0, width: "100%", height: "100%",
+          background: "rgba(0,0,0,0.7)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 999
+        }}>
+          <div style={{
+            background: "white", padding: "40px", borderRadius: "12px", textAlign: "center", maxWidth: "400px"
+          }}>
+            <h1 style={{fontSize: "48px", margin: 0}}>🎉</h1>
+            <h2 style={{margin: "10px 0"}}>Thank you for your order!</h2>
+            <p style={{fontSize: "18px", margin: "10px 0"}}>
+              Payment: <strong>{paymentMethod}</strong><br/>
+              Total: <strong>₱{total}</strong>
+            </p>
+            <p style={{color: "gray", fontSize: "14px"}}>We'll contact you soon for delivery 🚚</p>
+            <button onClick={() => {setCart([])}}
+              style={{marginTop: "20px", padding: "12px 24px", background: "black", color: "white", border: "none", borderRadius: "6px", cursor: "pointer", fontSize: "16px"}}>
+              Continue Shopping
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
