@@ -60,7 +60,7 @@ export default function Home() {
     })
     orderText += "\nPayment: " + paymentMethod + "\nTotal: ₱" + total
 
-    window.open("https://m.me/EngrCureq?text=" + encodeURIComponent(orderText), '_blank')
+    window.open("https://m.me/EngrCureg?text=" + encodeURIComponent(orderText), '_blank')
 
     setOrderPlaced(true)
     setTimeout(() => {
