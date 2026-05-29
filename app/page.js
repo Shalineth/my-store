@@ -51,23 +51,24 @@ export default function Home() {
 
   const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0)
 
-  const placeOrder = () => {
-    if (cart.length === 0) return alert("Cart is empty!")
+ const placeOrder = () => {
+  if (cart.length === 0) return alert("Cart is empty!")
 
-    let orderText = "🛍️ NEW ORDER!\n\n"
-    cart.forEach(i => {
-      orderText += i.name + " Size:" + i.size + " x" + i.qty + "\n"
-    })
-    orderText += "\nPayment: " + paymentMethod + "\nTotal: ₱" + total
+  let orderText = "🛍️ NEW ORDER!\n\n"
+  cart.forEach(i => {
+    orderText += i.name + " Size:" + i.size + " x" + i.qty + "\n"
+  })
+  orderText += "\nPayment: " + paymentMethod + "\nTotal: ₱" + total
 
-    window.open("https://m.me/EngrCureg?text=" + encodeURIComponent(orderText), '_blank')
 
-    setOrderPlaced(true)
-    setTimeout(() => {
-      setCart([])
-      setOrderPlaced(false)
-    }, 3000)
-  }
+  prompt("Copy mo to tapos paste sa Messenger kay EngrCureg:", orderText)
+
+  setOrderPlaced(true)
+  setTimeout(() => {
+    setCart([])
+    setOrderPlaced(false)
+  }, 3000)
+}
 
   const handleSizeChange = (productId, size) => {
     setSelectedSizes({...selectedSizes, [productId]: size})
