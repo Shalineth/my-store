@@ -2,7 +2,28 @@
 import { useState } from "react"
 
 export default function Home() {
-  const products = [... same products mo... ]
+  const products = [
+    { id: 1, name: "Classic T-Shirt", price: 250, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400", sizes: ["S", "M", "L", "XL"], stock: 50 },
+    { id: 2, name: "Running Shoes", price: 1200, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400", sizes: [40, 41, 42, 43, 44, 45], stock: 25 },
+    { id: 3, name: "Baseball Cap", price: 150, image: "https://picsum.photos/400/300?random=3", sizes: ["Free Size"], stock: 100 },
+    { id: 4, name: "Hooded Sweatshirt", price: 900, image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400", sizes: ["S", "M", "L", "XL", "XXL"], stock: 30 },
+    { id: 5, name: "Denim Jacket", price: 1800, image: "https://images.unsplash.com/photo-1551537482-f2075a1d41f2?w=400", sizes: ["S", "M", "L", "XL"], stock: 20 },
+    { id: 6, name: "Aviator Sunglasses", price: 500, image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400", sizes: ["One Size"], stock: 60 },
+    { id: 7, name: "Travel Backpack", price: 750, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400", sizes: ["One Size"], stock: 35 },
+    { id: 8, name: "Wrist Watch", price: 2200, image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400", sizes: ["One Size"], stock: 40 },
+    { id: 9, name: "Slim Fit Jeans", price: 1100, image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400", sizes: [28, 30, 32, 34, 36], stock: 45 },
+    { id: 10, name: "Wireless Headphones", price: 2500, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400", sizes: ["One Size"], stock: 15 },
+    { id: 11, name: "Leather Wallet", price: 650, image: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=400", sizes: ["One Size"], stock: 80 },
+    { id: 12, name: "Water Bottle", price: 300, image: "https://images.unsplash.com/photo-1602143402121-01be286532b1?w=400", sizes: ["500ml", "750ml", "1L"], stock: 90 },
+    { id: 13, name: "Laptop Sleeve", price: 450, image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400", sizes: ["13\"", "15\"", "17\""], stock: 55 },
+    { id: 14, name: "Sports Shorts", price: 400, image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400", sizes: ["S", "M", "L", "XL"], stock: 70 },
+    { id: 15, name: "Canvas Sneakers", price: 800, image: "https://images.unsplash.com/photo-1543508282-58d25617b7c7?w=400", sizes: [38, 39, 40, 41, 42, 43], stock: 32 },
+    { id: 16, name: "Winter Beanie", price: 200, image: "https://images.unsplash.com/photo-1576871337622-98d48d327cf8?w=400", sizes: ["One Size"], stock: 85 },
+    { id: 17, name: "Bluetooth Speaker", price: 1500, image: "https://images.unsplash.com/photo-1608042314453-ae338d80c092?w=400", sizes: ["One Size"], stock: 22 },
+    { id: 18, name: "Polarized Sunglasses", price: 600, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400", sizes: ["One Size"], stock: 50 },
+    { id: 19, name: "Cargo Pants", price: 950, image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400", sizes: ["S", "M", "L", "XL"], stock: 28 },
+    { id: 20, name: "Smartphone Stand", price: 180, image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400", sizes: ["One Size"], stock: 120 }
+  ]
 
   const [cart, setCart] = useState([])
   const [paymentMethod, setPaymentMethod] = useState("Cash on Delivery")
@@ -39,8 +60,7 @@ export default function Home() {
     })
     orderText += "\nPayment: " + paymentMethod + "\nTotal: ₱" + total
 
-    // Eto yung importante - encodeURI para di masira spaces
-    window.open("https://m.me/EngrCureq?text=" + encodeURI(orderText), '_blank')
+    window.open("https://m.me/EngrCureq?text=" + encodeURIComponent(orderText), '_blank')
 
     setOrderPlaced(true)
     setTimeout(() => {
