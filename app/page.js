@@ -56,13 +56,21 @@ export default function Home() {
 
   const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0)
 
-  const placeOrder = () => {
-    if (cart.length === 0) return alert("Cart is empty!")
-    setOrderPlaced(true)
-    setTimeout(() => {
-      setOrderPlaced(false)
-    }, 3000)
-  }
+ const placeOrder = () => {
+  if (cart.length === 0) return alert("Cart is empty!")
+  
+  const orderDetails = cart.map(i => `${i.name} Size:${i.size} x${i.qty}`).join(', ')
+  const message = `🛍️ NEW ORDER!%0A%0A${orderDetails}%0A%0APayment: ${paymentMethod}%0ATotal: ₱${total}%0A%0AStatus: Please contact customer`
+  
+
+  window.open(`https://m.me/EngrCureq?text=${message}`, '_blank')
+  
+  setOrderPlaced(true)
+  setTimeout(() => {
+    setCart([])
+    setOrderPlaced(false)
+  }, 3000)
+}
 
   const handleSizeChange = (productId, size) => {
     setSelectedSizes({...selectedSizes, [productId]: size})
