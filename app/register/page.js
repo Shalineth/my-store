@@ -1,14 +1,26 @@
+'use client'
+import { useRouter } from 'next/navigation'
+
 export default function RegisterPage() {
+  const router = useRouter()
+
+  const handleRegister = (e) => {
+    e.preventDefault()
+    localStorage.setItem('isLoggedIn', 'true')
+    router.push('/')
+  }
+
   return (
     <div style={{ maxWidth: '400px', margin: '60px auto', padding: '20px' }}>
       <h1 style={{ textAlign: 'center', marginBottom: '30px' }}>REGISTER</h1>
       
-      <form style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+      <form onSubmit={handleRegister} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
         <div>
           <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Full Name:</label>
           <input 
             type="text" 
             placeholder="Enter your name"
+            required
             style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', boxSizing: 'border-box' }}
           />
         </div>
@@ -18,6 +30,7 @@ export default function RegisterPage() {
           <input 
             type="email" 
             placeholder="Enter your email"
+            required
             style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', boxSizing: 'border-box' }}
           />
         </div>
@@ -27,6 +40,7 @@ export default function RegisterPage() {
           <input 
             type="password" 
             placeholder="Create a password"
+            required
             style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', boxSizing: 'border-box' }}
           />
         </div>
