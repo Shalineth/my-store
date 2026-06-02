@@ -1,23 +1,26 @@
-export default function RegisterPage() {
+'use client'
+import { useRouter } from 'next/navigation'
+
+export default function LoginPage() {
+  const router = useRouter()
+
+  const handleLogin = (e) => {
+    e.preventDefault()
+    localStorage.setItem('isLoggedIn', 'true')
+    router.push('/')
+  }
+
   return (
     <div style={{ maxWidth: '400px', margin: '60px auto', padding: '20px' }}>
-      <h1 style={{ textAlign: 'center', marginBottom: '30px' }}>REGISTER</h1>
+      <h1 style={{ textAlign: 'center', marginBottom: '30px' }}>LOGIN</h1>
       
-      <form style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-        <div>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Full Name:</label>
-          <input 
-            type="text" 
-            placeholder="Enter your name"
-            style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', boxSizing: 'border-box' }}
-          />
-        </div>
-
+      <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
         <div>
           <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Email:</label>
           <input 
             type="email" 
             placeholder="Enter your email"
+            required
             style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', boxSizing: 'border-box' }}
           />
         </div>
@@ -26,7 +29,8 @@ export default function RegisterPage() {
           <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Password:</label>
           <input 
             type="password" 
-            placeholder="Create a password"
+            placeholder="Enter your password"
+            required
             style={{ width: '100%', padding: '10px', border: '1px solid #ddd', borderRadius: '4px', boxSizing: 'border-box' }}
           />
         </div>
@@ -35,12 +39,12 @@ export default function RegisterPage() {
           type="submit"
           style={{ padding: '12px', backgroundColor: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer', marginTop: '10px' }}
         >
-          REGISTER
+          LOGIN
         </button>
       </form>
       
       <p style={{ textAlign: 'center', marginTop: '20px', fontSize: '14px' }}>
-        May account na? <a href="/login" style={{ color: '#0070f3' }}>Login here</a>
+        Wala pang account? <a href="/register" style={{ color: '#0070f3' }}>Register here</a>
       </p>
     </div>
   )
