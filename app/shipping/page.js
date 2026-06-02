@@ -27,7 +27,7 @@ export default function ShippingPage() {
           </thead>
           <tbody>
             <tr>
-              <td style={{ border: '1px solid #ddd', padding: '12px' }}>Metro Manila</td>
+              <td style={{ border: '1px solid #ddd', padding: '12px' }}>TUGUEGRAO CITY</td>
               <td style={{ border: '1px solid #ddd', padding: '12px' }}>FREE</td>
             </tr>
             <tr>
