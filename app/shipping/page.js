@@ -12,10 +12,9 @@ export default function ShippingPage() {
 
         <h3>📦 Delivery Time</h3>
         <ul>
-          <li><strong>Metro Manila:</strong> 2-3 business days</li>
-          <li><strong>Luzon:</strong> 3-5 business days</li>
-          <li><strong>Visayas & Mindanao:</strong> 5-7 business days</li>
-        </ul>
+          <li><strong>TUGUEGARAO CITY:</strong> 2-3 business days</li>
+          <li><strong>CAGAYAN:</strong> 3-5 business days</li>
+       
 
         <h3 style={{ marginTop: '30px' }}>💰 Shipping Rates</h3>
         <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '15px' }}>
