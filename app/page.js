@@ -1,181 +1,86 @@
 'use client'
-import { useState } from "react"
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
-export default function Home() {
-  const products = [
-    { id: 1, name: "IT WORKS ON MY MACHINE", price: 380, image: "https://picsum.photos/400/300?random=1", sizes: ["S", "M", "L", "XL", "XXL"], stock: 50 },
-    { id: 2, name: "COFFEE++", price: 280, image: "https://picsum.photos/400/300?random=2", sizes: ["One Size"], stock: 40 },
-    { id: 3, name: "404 SLEEP NOT FOUND", price: 980, image: "https://picsum.photos/400/300?random=3", sizes: ["S", "M", "L", "XL", "XXL"], stock: 30 },
-    { id: 4, name: "01000 01001", price: 320, image: "https://picsum.photos/400/300?random=4", sizes: ["Free Size"], stock: 35 },
-    { id: 5, name: "THERE IS NO CLOUD", price: 270, image: "https://picsum.photos/400/300?random=5", sizes: ["One Size"], stock: 45 },
-    { id: 6, name: "CTRL+Z MY LIFE", price: 90, image: "https://picsum.photos/400/300?random=6", sizes: ["One Size"], stock: 100 },
-    { id: 7, name: "PRINTF HELLO WORLD", price: 380, image: "https://picsum.photos/400/300?random=7", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 8, name: "BUGS ARE FEATURES", price: 950, image: "https://picsum.photos/400/300?random=8", sizes: ["S", "M", "L", "XL"], stock: 25 },
-    { id: 9, name: "SEGMENTATION FAULT", price: 380, image: "https://picsum.photos/400/300?random=9", sizes: ["S", "M", "L", "XL"], stock: 40 },
-    { id: 10, name: "I VOID WARRANTIES", price: 350, image: "https://picsum.photos/400/300?random=10", sizes: ["S", "M", "L"], stock: 35 },
-    { id: 11, name: "BEER 36 COFFEE 37", price: 280, image: "https://picsum.photos/400/300?random=11", sizes: ["One Size"], stock: 50 },
-    { id: 12, name: "SUDO MAKE ME SANDWICH", price: 380, image: "https://picsum.photos/400/300?random=12", sizes: ["S", "M", "L", "XL"], stock: 45 },
-    { id: 13, name: "WHILE TRUE SLEEP", price: 980, image: "https://picsum.photos/400/300?random=13", sizes: ["S", "M", "L", "XL", "XXL"], stock: 20 },
-    { id: 14, name: "GIT COMMIT M WIP", price: 380, image: "https://picsum.photos/400/300?random=14", sizes: ["S", "M", "L", "XL"], stock: 55 },
-    { id: 15, name: "I SPEAK FLUENT SARCASM", price: 320, image: "https://picsum.photos/400/300?random=15", sizes: ["Free Size"], stock: 60 },
-    { id: 16, name: "KEEP CALM AND DEBUG", price: 380, image: "https://picsum.photos/400/300?random=16", sizes: ["S", "M", "L", "XL"], stock: 70 },
-    { id: 17, name: "THERE ARE 10 TYPES", price: 380, image: "https://picsum.photos/400/300?random=17", sizes: ["S", "M", "L", "XL"], stock: 40 },
-    { id: 18, name: "WIFI PASSWORD INCORRECT", price: 90, image: "https://picsum.photos/400/300?random=18", sizes: ["One Size"], stock: 120 },
-    { id: 19, name: "MY CODE DOESNT WORK", price: 380, image: "https://picsum.photos/400/300?random=19", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 20, name: "I DONT ALWAYS TEST", price: 380, image: "https://picsum.photos/400/300?random=20", sizes: ["S", "M", "L", "XL"], stock: 45 },
-    { id: 21, name: "THERE IS NO PLACE LIKE 127.0.0.1", price: 380, image: "https://picsum.photos/400/300?random=21", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 22, name: "EXCEPTIONS ARE MY CONSTANT", price: 380, image: "https://picsum.photos/400/300?random=22", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 23, name: "I CODE THEREFORE I AM", price: 380, image: "https://picsum.photos/400/300?random=23", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 24, name: "TALK IS CHEAP SHOW CODE", price: 380, image: "https://picsum.photos/400/300?random=24", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 25, name: "REAL PROGRAMMERS NO COMMENT", price: 380, image: "https://picsum.photos/400/300?random=25", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 26, name: "I TURN COFFEE INTO CODE", price: 380, image: "https://picsum.photos/400/300?random=26", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 27, name: "IF IT HURTS DO IT MORE", price: 380, image: "https://picsum.photos/400/300?random=27", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 28, name: "DEBUGGING IS DETECTIVE WORK", price: 380, image: "https://picsum.photos/400/300?random=28", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 29, name: "EAT SLEEP CODE REPEAT", price: 380, image: "https://picsum.photos/400/300?random=29", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 30, name: "NULL POINTER EXCEPTION", price: 380, image: "https://picsum.photos/400/300?random=30", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 31, name: "NO IDEA WHAT IM DOING", price: 380, image: "https://picsum.photos/400/300?random=31", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 32, name: "CODE LIKE A GIRL", price: 380, image: "https://picsum.photos/400/300?random=32", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 33, name: "PAUSE GAME TO BE HERE", price: 380, image: "https://picsum.photos/400/300?random=33", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 34, name: "PROGRAMMER AT WORK", price: 380, image: "https://picsum.photos/400/300?random=34", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 35, name: "KEEP CALM PUSH TO PROD", price: 380, image: "https://picsum.photos/400/300?random=35", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 36, name: "MY OTHER PC IS YOURS", price: 380, image: "https://picsum.photos/400/300?random=36", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 37, name: "ERROR 404 BRAIN NOT FOUND", price: 380, image: "https://picsum.photos/400/300?random=37", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 38, name: "SUDO RM RF", price: 380, image: "https://picsum.photos/400/300?random=38", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 39, name: "I AM THE SENIOR DEV", price: 380, image: "https://picsum.photos/400/300?random=39", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 40, name: "MOVE FAST BREAK THINGS", price: 380, image: "https://picsum.photos/400/300?random=40", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 41, name: "HELLO WORLD FROM HELL", price: 380, image: "https://picsum.photos/400/300?random=41", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 42, name: "I DEBUG FOR FUN", price: 380, image: "https://picsum.photos/400/300?random=42", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 43, name: "GIT PULL ORIGIN MASTER", price: 380, image: "https://picsum.photos/400/300?random=43", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 44, name: "CODE SLEEP REPEAT", price: 380, image: "https://picsum.photos/400/300?random=44", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 45, name: "BRUTE FORCE SOLUTION", price: 380, image: "https://picsum.photos/400/300?random=45", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 46, name: "STACK OVERFLOW SURVIVOR", price: 380, image: "https://picsum.photos/400/300?random=46", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 47, name: "ALGORITHM NINJA", price: 380, image: "https://picsum.photos/400/300?random=47", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 48, name: "COMPILE ERROR DETECTED", price: 380, image: "https://picsum.photos/400/300?random=48", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 49, name: "I SPEAK BINARY", price: 380, image: "https://picsum.photos/400/300?random=49", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 50, name: "CACHE ME OUTSIDE", price: 380, image: "https://picsum.photos/400/300?random=50", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 51, name: "THERE ARE ONLY 10 PEOPLE", price: 380, image: "https://picsum.photos/400/300?random=51", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 52, name: "UNDER CONSTRUCTION", price: 320, image: "https://picsum.photos/400/300?random=52", sizes: ["Free Size"], stock: 40 },
-    { id: 53, name: "I HAVE ROOT ACCESS", price: 380, image: "https://picsum.photos/400/300?random=53", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 54, name: "KEEP CALM AND CODE ON", price: 380, image: "https://picsum.photos/400/300?random=54", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 55, name: "DEBUGGER BY DAY", price: 380, image: "https://picsum.photos/400/300?random=55", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 56, name: "I HATE JAVASCRIPT", price: 380, image: "https://picsum.photos/400/300?random=56", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 57, name: "PYTHON IS LIFE", price: 380, image: "https://picsum.photos/400/300?random=57", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 58, name: "C PLUS FOREVER", price: 380, image: "https://picsum.photos/400/300?random=58", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 59, name: "LINUX USER", price: 380, image: "https://picsum.photos/400/300?random=59", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 60, name: "WINDOWS UPDATE RUINED ME", price: 380, image: "https://picsum.photos/400/300?random=60", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 61, name: "MAC USER BUT POOR", price: 380, image: "https://picsum.photos/400/300?random=61", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 62, name: "DARK MODE ONLY", price: 380, image: "https://picsum.photos/400/300?random=62", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 63, name: "LIGHT MODE USER", price: 380, image: "https://picsum.photos/400/300?random=63", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 64, name: "VIM USER", price: 380, image: "https://picsum.photos/400/300?random=64", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 65, name: "EMACS FOREVER", price: 380, image: "https://picsum.photos/400/300?random=65", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 66, name: "VS CODE MASTER", price: 380, image: "https://picsum.photos/400/300?random=66", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 67, name: "CTRL C CTRL V DEV", price: 380, image: "https://picsum.photos/400/300?random=67", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 68, name: "COPY PASTE ENGINEER", price: 380, image: "https://picsum.photos/400/300?random=68", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 69, name: "GOOGLE IS MY IDE", price: 380, image: "https://picsum.photos/400/300?random=69", sizes: ["S", "M", "L", "XL"], stock: 50 },
-    { id: 70, name: "RTFM USER", price: 380, image: "https://picsum.photos/400/300?random=70", sizes: ["S", "M", "L", "XL"], stock: 50 }
-  ]
+export default function HomePage() {
+  const router = useRouter()
 
-  const [cart, setCart] = useState([])
-  const [paymentMethod, setPaymentMethod] = useState("Cash on Delivery")
-  const [orderPlaced, setOrderPlaced] = useState(false)
-  const [selectedSizes, setSelectedSizes] = useState({})
-
-  const addToCart = (product) => {
-    const size = selectedSizes[product.id] || product.sizes[0]
-    const existing = cart.find(item => item.id === product.id && item.size === size)
-    if (existing) {
-      setCart(cart.map(item => item.id === product.id && item.size === size? {...item, qty: item.qty + 1} : item))
-    } else {
-      setCart([...cart, {...product, size, qty: 1}])
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn')
+    if (!isLoggedIn) {
+      router.push('/login')
     }
-  }
+  }, [])
 
-  const updateQty = (id, size, qty) => {
-    if (qty <= 0) {
-      setCart(cart.filter(item =>!(item.id === id && item.size === size)))
-    } else {
-      setCart(cart.map(item => item.id === id && item.size === size? {...item, qty} : item))
-    }
-  }
-
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0)
-
-  const placeOrder = () => {
-    if (cart.length === 0) return alert("Cart is empty!")
-    let orderText = "🛍️ NEW ORDER!\n\n"
-    cart.forEach(i => {
-      orderText += i.name + " Size:" + i.size + " x" + i.qty + "\n"
-    })
-    orderText += "\nPayment: " + paymentMethod + "\nTotal: ₱" + total
-    if(paymentMethod.includes("GCash")) orderText += "\n\n📲 GCash: 0965 977 8595"
-    prompt("Copy mo to at send kay EngrCureg:", orderText)
-    setOrderPlaced(true)
-    setTimeout(() => {setCart([]); setOrderPlaced(false)}, 3000)
-  }
-
-  const handleSizeChange = (productId, size) => {
-    setSelectedSizes({...selectedSizes, [productId]: size})
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn')
+    router.push('/login')
   }
 
   return (
-    <div style={{fontFamily: "Arial", maxWidth: "1200px", margin: "0 auto", padding: "0 20px"}}>
-      <header style={{display: "flex", justifyContent: "space-between", padding: "20px 0", borderBottom: "2px solid #000", position: "sticky", top: 0, background: "white", zIndex: 10}}>
-        <h1 style={{margin: 0}}>💻 CpE MERCH STORE</h1>
-        <div style={{fontSize: "18px"}}>Cart: <strong>{cart.reduce((s, i) => s + i.qty, 0)}</strong> items</div>
-      </header>
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <h1 style={{ fontSize: '36px' }}>CpE Merch Store</h1>
+        <button 
+          onClick={handleLogout}
+          style={{ padding: '8px 16px', backgroundColor: '#dc2626', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+        >
+          LOGOUT
+        </button>
+      </div>
+      
+      <p style={{ textAlign: 'center', color: '#666', marginBottom: '40px' }}>
+        Built by CpE students, for CpE students
+      </p>
 
-      <main style={{padding: "30px 0"}}>
-        <div style={{display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: "20px"}}>
-          {products.map(p => (
-            <div key={p.id} style={{border: "2px solid #ddd", padding: "15px", borderRadius: "10px", textAlign: "center", background: "#fafafa"}}>
-              <img src={p.image} alt={p.name} style={{width: "100%", height: "200px", objectFit: "cover", borderRadius: "8px"}}/>
-              <h3 style={{fontSize: "14px", margin: "10px 0", minHeight: "40px"}}>{p.name}</h3>
-              <p style={{fontSize: "20px", fontWeight: "bold", margin: "10px 0"}}>₱{p.price}</p>
-              <select value={selectedSizes[p.id] || p.sizes[0]} onChange={(e) => handleSizeChange(p.id, e.target.value)} style={{padding: "8px", width: "100%", marginBottom: "10px", borderRadius: "4px"}}>
-                {p.sizes.map(s => <option key={s}>{s}</option>)}
-              </select>
-              <button onClick={() => addToCart(p)} style={{padding: "12px", width: "100%", background: "black", color: "white", border: "none", borderRadius: "6px", cursor: "pointer", fontWeight: "bold"}}>ADD TO CART</button>
-            </div>
-          ))}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px', marginTop: '40px' }}>
+        
+        <div style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '8px', textAlign: 'center' }}>
+          <h3>GOOGLE IS MY IDE</h3>
+          <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#0070f3' }}>₱349.00</p>
+          <button 
+            className="snipcart-add-item"
+            data-item-id="cpe-shirt-1"
+            data-item-price="349"
+            data-item-url="/"
+            data-item-name="GOOGLE IS MY IDE Shirt"
+            style={{ padding: '10px 20px', backgroundColor: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginTop: '10px' }}
+          >
+            Add to Cart
+          </button>
         </div>
-      </main>
 
-      <aside style={{padding: "20px", borderTop: "2px solid #000", marginTop: "40px"}}>
-        <h2>🛒 Your Cart</h2>
-        {cart.length === 0? <p>Empty pa. Add ka na!</p> : cart.map((item) => (
-          <div key={item.id + item.size} style={{display: "flex", justifyContent: "space-between", padding: "12px 0", borderBottom: "1px solid #ddd"}}>
-            <div>
-              <strong>{item.name}</strong><br/>
-              Size: {item.size} | ₱{item.price} x {item.qty}
-            </div>
-            <div>
-              <button onClick={() => updateQty(item.id, item.size, item.qty - 1)} style={{padding: "5px 10px"}}>-</button>
-              <span style={{margin: "0 10px"}}>{item.qty}</span>
-              <button onClick={() => updateQty(item.id, item.size, item.qty + 1)} style={{padding: "5px 10px"}}>+</button>
-            </div>
-          </div>
-        ))}
-        {cart.length > 0 && (
-          <div style={{marginTop: "20px"}}>
-            <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)} style={{padding: "10px", width: "100%", marginBottom: "15px", borderRadius: "6px"}}>
-              <option>Cash on Delivery</option>
-              <option>GCash - 0965 977 8595</option>
-            </select>
-            <p style={{fontSize: "24px", fontWeight: "bold"}}>Total: ₱{total}</p>
-            <button onClick={placeOrder} style={{padding: "15px", width: "100%", background: "green", color: "white", border: "none", borderRadius: "8px", fontSize: "18px", fontWeight: "bold", cursor: "pointer"}}>PLACE ORDER</button>
-          </div>
-        )}
-      </aside>
-
-      {orderPlaced && (
-        <div style={{position: "fixed", top: 0, left: 0, width: "100%", height: "100%", background: "rgba(0,0,0,0.😎", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 999}}>
-          <div style={{background: "white", padding: "50px", borderRadius: "15px", textAlign: "center", maxWidth: "400px"}}>
-            <h2 style={{fontSize: "32px"}}>🎉 Order Received!</h2>
-            <p style={{fontSize: "18px"}}>Screenshot mo yung order tapos PM kay EngrCureg</p>
-            <button onClick={() => setOrderPlaced(false)} style={{marginTop: "20px", padding: "15px 30px", background: "black", color: "white", border: "none", borderRadius: "8px", fontSize: "16px", cursor: "pointer"}}>Close</button>
-          </div>
+        <div style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '8px', textAlign: 'center' }}>
+          <h3>HELLO WORLD</h3>
+          <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#0070f3' }}>₱349.00</p>
+          <button 
+            className="snipcart-add-item"
+            data-item-id="cpe-shirt-2"
+            data-item-price="349"
+            data-item-url="/"
+            data-item-name="HELLO WORLD Shirt"
+            style={{ padding: '10px 20px', backgroundColor: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginTop: '10px' }}
+          >
+            Add to Cart
+          </button>
         </div>
-      )}
+
+        <div style={{ border: '1px solid #ddd', padding: '20px', borderRadius: '8px', textAlign: 'center' }}>
+          <h3>DEBUG MODE</h3>
+          <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#0070f3' }}>₱349.00</p>
+          <button 
+            className="snipcart-add-item"
+            data-item-id="cpe-shirt-3"
+            data-item-price="349"
+            data-item-url="/"
+            data-item-name="DEBUG MODE Shirt"
+            style={{ padding: '10px 20px', backgroundColor: '#0070f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', marginTop: '10px' }}
+          >
+            Add to Cart
+          </button>
+        </div>
+
+      </div>
     </div>
   )
 }
