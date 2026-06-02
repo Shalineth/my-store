@@ -20,7 +20,7 @@ export default function ContactPage() {
 
         <div style={{ backgroundColor: '#f5f5f5', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
           <h3>📍 Location</h3>
-          <p>University Area, Philippines</p>
+          <p>CAGAYAN STATE UNIVERSITY</p>
           <p style={{ fontSize: '14px', color: '#666' }}>Meetup available sa campus</p>
         </div>
 
